@@ -1,2 +1,3 @@
 # Two-Player-Chess
-I created a two player chess game in Java from scratch.
+How To Play:
+The white team goes first. In order to make a move, click on the piece you wish to move. The tiles that you can move the piece to will be marked with a gray circle. If there are no legal moves for the selected piece, no tiles will be marked. Once you've decided which tile you want to move to, click on that tile. If you wish to move a different piece, simply click on that piece. If you click on the opposing team's piece, nothing will happen. if your king is in check, only moves that remove the king from danger are allowed. The team currently taking their turn is displayed on the top of the window. When the game ends, the winning team will replace that text. Enjoy!
