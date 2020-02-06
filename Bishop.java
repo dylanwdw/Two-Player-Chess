@@ -14,7 +14,7 @@ public class Bishop extends Piece
 		return "Bishop";
 	}
 	
-	protected Image getImage()
+	protected Image getImage() //graphic representation of the Bishop
 	{
 		Image icon;
 		if(this.team == Team.WHITE)
@@ -28,17 +28,18 @@ public class Bishop extends Piece
 		return icon;
 	}
 	
-	protected int[][] calculatePossibleMoves()
+	protected int[][] calculatePossibleMoves() //returns all possible moves. 0 = current position, 1 = impossible move, 2 = possible move.
 	{
-		boolean restUnaccesable = false;
-		int[][] movesArray = new int[Board.boardWidth][Board.boardWidth];
+		boolean restUnaccesable = false; //when a piece is detected in the path, this is set to true.
+		int[][] movesArray = new int[Board.boardWidth][Board.boardWidth]; 
 		
-		//Current Location to top Left
+		//Tests the diagonal path from the bishop's current position to the top left of the board. (0,0) = top left
 		int x = this.xCord-1;
 		int y = this.yCord-1;
+		
 		while(x>=0 && y>=0)
 		{
-			if(Board.board[y][x] != null || restUnaccesable == true)
+			if(Board.board[y][x] != null || restUnaccesable == true) //tests if there is another piece in the way
 			{
 				if(restUnaccesable == false && Board.board[y][x].team != this.team)
 				{
@@ -121,7 +122,7 @@ public class Bishop extends Piece
 		}
 		restUnaccesable = false;
 		
-		movesArray[this.yCord][this.xCord] = 0;
+		movesArray[this.yCord][this.xCord] = 0; // sets current position to 0
 		return movesArray;
 	}
 }

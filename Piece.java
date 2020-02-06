@@ -1,5 +1,6 @@
 import java.awt.Image;
 
+// This class defines the behavior of every piece. 
 public abstract class Piece
 {
 	protected Team team;
@@ -7,12 +8,13 @@ public abstract class Piece
 	protected int yCord;
 	protected boolean firstMove = true;
 	
-	protected int[][] possibleMoves;
-	protected int[][] legalMoves;
+	protected int[][] possibleMoves; //an array of all the possible moves the piece can make, ignoring whether or not the piece's team's king is in check.
+	protected int[][] legalMoves; // an array of all legal moves the piece can make. if this team's king is in check, a move is only legal if it removes the king from danger.
 	
 	private static int blackSide = 0;
 	private static int whiteSide = Board.boardWidth-1;
 	
+	//This constructor is only called by subclasses.
 	public Piece(int xCord, int yCord, Team team)
 	{
 		this.xCord = xCord;
@@ -20,21 +22,23 @@ public abstract class Piece
 		this.team = team;
 	}
 	
-	public abstract String getName();
+	public abstract String getName(); //returns the type of piece as a String.
 	
-	protected abstract int[][] calculatePossibleMoves();
+	protected abstract int[][] calculatePossibleMoves(); //Each piece moves differently, so this method is implemented by each individual piece. 
 
-	protected abstract Image getImage();
+	protected abstract Image getImage(); //returns the graphic representation of the piece to be displayed on the chess board.
 	
+	//returns the side (top or bottom) on which the pieces line up at the beginning of the game. Could possibly be c
 	public int getStartingSide()
 	{
 		if(this.team == Team.BLACK)
 		{
-			return blackSide;
+			return blackSide; //represent the top of the board
 		}
-		return whiteSide;
+		return whiteSide; //represents the bottom of the board
 	}
 	
+	//If this piece's team's king is in check, only moves that remove the king from danger are legal. Otherwise, this array is identical to the possibleMoves array.
 	protected int[][] calculateLegalMoves()
 	{
 		Piece king = Game.getKing();
@@ -77,6 +81,13 @@ public abstract class Piece
 		return movesArray;
 	}
 	
+	//recalculates the possible and legal moves.
+	public void updateArrays()
+	{
+		this.possibleMoves = this.calculatePossibleMoves();
+		this.legalMoves = this.calculateLegalMoves();
+	}
+	
 	public int getX() 
 	{
 		return xCord;
@@ -90,12 +101,6 @@ public abstract class Piece
 	public Team getTeam()
 	{
 		return team;
-	}
-	
-	public void updateArrays()
-	{
-		this.possibleMoves = this.calculatePossibleMoves();
-		this.legalMoves = this.calculateLegalMoves();
 	}
 	
 	public int[][] getLegalMoves()

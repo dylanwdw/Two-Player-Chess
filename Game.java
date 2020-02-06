@@ -1,19 +1,19 @@
-
 public class Game 
 {
 	
-	public static int resolution = 640;
-	public static double scalingFactor = 1.25;
+	public static final int resolution = 640;
+	public static final double scalingFactor = 1.25; //This value can be changed to your monitor's current scaling factor.
 	
 	public static Team turn = Team.WHITE;
-	public static Piece[] whitePieces = new Piece[16];
-	public static Piece[] blackPieces = new Piece[16];
-	public static Team winner;
-	public static boolean checkKing = false;
-	public static boolean checkMate = false;
-	public static boolean checkDraw = false;
+	public static Piece[] whitePieces = new Piece[16]; //contains all the white pieces
+	public static Piece[] blackPieces = new Piece[16]; //contains all the black pieces
+	public static Team winner; //initalized when there is a winner
+	public static boolean checkKing = false; //set to true if the current turn's team is in check
+	public static boolean checkMate = false; //set to true if the current turn's team is in check mate
+	public static boolean checkDraw = false; //set to true in the case of a draw
 	
-	public static void updateTurn()
+	//update the current turn after every move
+	public static void updateTurn() 
 	{
 		if(turn == Team.WHITE)
 		{
@@ -23,6 +23,7 @@ public class Game
 		turn = Team.WHITE;
 	}
 	
+	//returns the king of the current turn's team.
 	public static Piece getKing()
 	{
 		if(turn == Team.WHITE)
@@ -30,6 +31,7 @@ public class Game
 		return blackPieces[12];
 	}
 	
+	//initializes every piece with their legal starting positions
 	public static void generatePieces()
 	{
 		
@@ -58,11 +60,11 @@ public class Game
 		blackPieces[12] = new King(4, 0, Team.BLACK);
 	}	
 	
+	//moves a specified piece to a specified position.
 	public static void move(Piece piece, int newX, int newY)
 	{
-		
-		Board.board[piece.yCord][piece.xCord] = null; 
-		Board.board[newY][newX] = piece;
+		Board.board[piece.yCord][piece.xCord] = null; //old position
+		Board.board[newY][newX] = piece; //new position
 		piece.xCord = newX;
 		piece.yCord = newY;
 		piece.firstMove = false;
@@ -79,12 +81,13 @@ public class Game
 				}
 			}
 		}
-		checkKing();
-		checkMate();
+		//re-checks the three possible game states since a new move was made
+		checkKing(); 
+		checkMate(); 
 		checkDraw();
 	}
 	
-	//return true if current player's king is in check
+	//returns true if current player's king is in check
 	public static void checkKing()
 	{
 		for(int x=0; x<8; x++)
@@ -104,7 +107,7 @@ public class Game
 		checkKing = false;
 	}
 	
-	//return true if current player's king is in check mate
+	//returns true if current player's king is in check mate
 	public static void checkMate()
 	{
 		if(checkKing == true)
@@ -132,6 +135,7 @@ public class Game
 		}
 	}
 	
+	//returns true in the case of a draw (no legal moves, but king is not in check)
 	public static void checkDraw()
 	{
 		if(checkKing == false)
@@ -160,6 +164,7 @@ public class Game
 		checkDraw = true;
 	}
 	
+	//returns the color of the current turn's team as a string
 	public static String getTurnAsString()
 	{
 		if (turn == Team.BLACK)

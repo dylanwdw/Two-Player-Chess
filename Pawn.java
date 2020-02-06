@@ -14,7 +14,7 @@ public final class Pawn extends Piece
 		return "Pawn";
 	}
 	
-	protected Image getImage()
+	protected Image getImage() //graphic representation of thr Pawn
 	{
 		Image icon;
 		if(this.team == Team.WHITE)
@@ -28,10 +28,11 @@ public final class Pawn extends Piece
 		return icon;
 	}
 	
-	protected int[][] calculatePossibleMoves()
+	protected int[][] calculatePossibleMoves() //returns all possible moves. 0 = current position, 1 = impossible move, 2 = possible move.
 	{
 		int[][] movesArray = new int[Board.boardWidth][Board.boardWidth];
 		
+		//The pawn has a special move where it can move two spots if it is it's first move.
 		for(int x=0; x<8; x++)
 		{
 			for(int y=0; y<8; y++)

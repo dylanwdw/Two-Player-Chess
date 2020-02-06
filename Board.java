@@ -1,7 +1,7 @@
 public class Board 
 {
-	public static Piece[][] board;
-	public static final int boardWidth = 8;
+	public static Piece[][] board; // Keeps track of the positions of every piece on the board. [0][0] is the top left. If there is no piece, the position is null.
+	public static final int boardWidth = 8; 
 	
 	public Board()
 	{
@@ -9,16 +9,7 @@ public class Board
 		init();
 	}
 	
-	public static void add(Piece piece)
-	{
-		board[piece.getY()][piece.getX()] = piece;
-	}
-	
-	public static Piece getPiece(int xCord, int yCord)
-	{
-		return board[yCord][xCord];
-	}
-	
+	//Initialized the board with all 32 pieces in their legal starting positions.
 	private void init()
 	{
 		Game.generatePieces();
@@ -39,6 +30,18 @@ public class Board
 				}
 			}
 		}
+	}
+	
+	//puts a piece on the board. 
+	public static void add(Piece piece) 
+	{
+		board[piece.getY()][piece.getX()] = piece;
+	}
+	
+	//returns the piece at the specified position.
+	public static Piece getPiece(int xCord, int yCord)
+	{
+		return board[yCord][xCord];
 	}
 	
 }

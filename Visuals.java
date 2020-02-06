@@ -4,17 +4,15 @@ import javax.swing.*;
 
 public class Visuals extends JComponent implements Runnable
 {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Window window;
-	public static Graphics2D g2;
+	public static Graphics2D g2; 
 	private BufferStrategy bs;
 	public Graphics g;
-	private static int fps = 10;
+	private static int fps = 10; //rate at which the thread runs
 	private Thread thread;
-	private boolean isRunning = false;
+	private boolean isRunning = false; //keeps track of the state if the thread
 	private Mouse mouseListener;
 	private Color myBrown = new Color(208, 140, 71);
 	private Color myBeige = new Color(254, 206, 158);
@@ -25,6 +23,7 @@ public class Visuals extends JComponent implements Runnable
 	private int imageSize = (int)(60/scalingFactor);
 	private int imageOffset = (tileSize-imageSize)/2;
 	
+	//Constructor: initialized the window and mouse listener, adds mouse listener to the window
 	public Visuals()
 	{
 		window = new Window();
@@ -33,6 +32,7 @@ public class Visuals extends JComponent implements Runnable
 		window.getFrame().addMouseListener(new Mouse());
 	}
 
+	//updates the graphics to their proper state/position. Repeatedly called by run() function
 	public void render()
 	{
 
@@ -45,14 +45,14 @@ public class Visuals extends JComponent implements Runnable
 	
 		g = bs.getDrawGraphics();
 		
-		g.clearRect(0,  0, screenSize, screenSize);
+		g.clearRect(0,  0, screenSize, screenSize); //temporarily clears the graphics so they can be redrawn.
 		
 		//Main Loop
 		for(int x=0; x<8; x++)
 		{
 			for(int y=0; y<8; y++)
 			{
-				//creates checkerboard
+				//draws checkerboard
 				if((y%2 == 0 && x%2 != 0) || y%2 != 0 && x%2 == 0)
 				{
 					g.setColor(myBrown);
@@ -72,7 +72,7 @@ public class Visuals extends JComponent implements Runnable
 			}
 		}
 		
-		//highlights the tiles for available moves
+		//highlights the tiles for legal moves, if the user clicks on a piece.
 		Piece piece = mouseListener.getPrimedPiece();
 		for(int x=0; x<8; x++)
 		{
@@ -97,6 +97,7 @@ public class Visuals extends JComponent implements Runnable
 		bs.show();
 		g.dispose();
 		
+		//changes the text at the top of the window to the proper state of the game (White's turn, Black's turn, checkmate, etc.)
 		if(Game.checkMate == true)
 		{
 			if(Game.getTurnAsString().equals("White"))
@@ -118,6 +119,7 @@ public class Visuals extends JComponent implements Runnable
 		}
 	}
 	
+	//repeatedly called by the thread
 	public void run()
 	{
 		double timePerTick = 1000000000/fps;
@@ -138,6 +140,7 @@ public class Visuals extends JComponent implements Runnable
 		stop();
 	}
 	
+	//starts the thread
 	public synchronized void start()
 	{
 		if(isRunning)
@@ -149,6 +152,7 @@ public class Visuals extends JComponent implements Runnable
 		thread.start();
 	}
 	
+	//ends the thread
 	public synchronized void stop()
 	{
 		if(!isRunning)

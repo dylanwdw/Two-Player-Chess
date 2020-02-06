@@ -14,7 +14,7 @@ public class King extends Piece
 		return "King";
 	}
 	
-	protected Image getImage()
+	protected Image getImage() //graphic representation of the king
 	{
 		Image icon;
 		if(this.team == Team.WHITE)
@@ -28,7 +28,7 @@ public class King extends Piece
 		return icon;
 	}
 	
-	protected int[][] calculatePossibleMoves()
+	protected int[][] calculatePossibleMoves() //returns all possible moves. 0 = current position, 1 = impossible move, 2 = possible move.
 	{
 		int[][] movesArray = new int[Board.boardWidth][Board.boardWidth];
 		
