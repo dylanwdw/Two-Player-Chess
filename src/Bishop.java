@@ -9,6 +9,7 @@ public class Bishop extends Piece
 		super(xCord, yCord, team);
 	}
 	
+	//returns the type of piece as a string
 	public String getName()
 	{
 		return "Bishop";

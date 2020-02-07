@@ -9,6 +9,7 @@ public class Knight extends Piece
 		super(xCord, yCord, team);
 	}
 	
+	//returns the piece type as a string
 	public String getName()
 	{
 		return "Knight";
@@ -30,6 +31,7 @@ public class Knight extends Piece
 	
 	protected int[][] calculatePossibleMoves() //returns all possible moves. 0 = current position, 1 = impossible move, 2 = possible move.
 	{
+	
 		int movesArray[][] = new int[Board.boardWidth][Board.boardWidth];
 		for(int x=0; x<Board.boardWidth; x++)
 		{

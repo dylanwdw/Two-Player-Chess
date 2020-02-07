@@ -14,7 +14,7 @@ public final class Pawn extends Piece
 		return "Pawn";
 	}
 	
-	protected Image getImage() //graphic representation of thr Pawn
+	protected Image getImage() //graphic representation of the Pawn
 	{
 		Image icon;
 		if(this.team == Team.WHITE)
@@ -37,7 +37,7 @@ public final class Pawn extends Piece
 		{
 			for(int y=0; y<8; y++)
 			{
-				if(this.team == Team.WHITE)
+				if(this.team == Team.WHITE) //then the pawns are initially on the bottom
 				{
 					if(firstMove == true && y == 4 && x == this.xCord && Board.board[y][x] == null && Board.board[5][x] == null)
 					{
@@ -48,7 +48,7 @@ public final class Pawn extends Piece
 						movesArray[y][x] = 1;
 					}
 				}
-				else
+				else //then the pawns are initially at the top
 				{
 					if(firstMove == true && y == 3 && x == this.xCord && Board.board[y][x] == null && Board.board[2][x] == null)
 					{

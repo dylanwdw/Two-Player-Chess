@@ -1,7 +1,7 @@
 public class Board 
 {
 	public static Piece[][] board; // Keeps track of the positions of every piece on the board. [0][0] is the top left. If there is no piece, the position is null.
-	public static final int boardWidth = 8; 
+	public static final int boardWidth = 8; //number of tiles on the board. height variable is not needed since the board is a square.
 	
 	public Board()
 	{

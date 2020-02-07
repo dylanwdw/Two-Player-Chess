@@ -6,22 +6,22 @@ public class Visuals extends JComponent implements Runnable
 {
 	
 	private static final long serialVersionUID = 1L;
-	private Window window;
+	private Window window; //container for these graphics
 	public static Graphics2D g2; 
 	private BufferStrategy bs;
 	public Graphics g;
 	private static int fps = 10; //rate at which the thread runs
 	private Thread thread;
 	private boolean isRunning = false; //keeps track of the state if the thread
-	private Mouse mouseListener;
+	private Mouse mouseListener; //detects mouse clicks
 	private Color myBrown = new Color(208, 140, 71);
 	private Color myBeige = new Color(254, 206, 158);
 	
-	private double scalingFactor = Game.scalingFactor;
+	private double scalingFactor = Game.scalingFactor; 
 	private int screenSize = (int)(Game.resolution/scalingFactor);
 	private int tileSize = screenSize/8;
-	private int imageSize = (int)(60/scalingFactor);
-	private int imageOffset = (tileSize-imageSize)/2;
+	private int imageSize = (int)(60/scalingFactor); //size of the chess piece icons
+	private int imageOffset = (tileSize-imageSize)/2; //the position of the chess piece icons on the board may need to be altered slightly
 	
 	//Constructor: initialized the window and mouse listener, adds mouse listener to the window
 	public Visuals()

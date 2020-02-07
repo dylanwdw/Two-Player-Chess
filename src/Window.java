@@ -19,16 +19,11 @@ public class Window extends Canvas implements ActionListener //ActionListener is
 	
 	public Window()
 	{
-		this.init();
-	}
-	
-	private void init()
-	{
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame = new JFrame(); 
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //program will terminate when window is closed
 		frame.setSize(screenSize, screenSize);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
+		frame.setResizable(false); //window can not be stretched
+		frame.setLocationRelativeTo(null); //window will be positioned in the middle of the screen
 		frame.setIconImage(finalImage);
 		this.setCanvas();
 		frame.setVisible(true); //makes the window visible
@@ -36,7 +31,7 @@ public class Window extends Canvas implements ActionListener //ActionListener is
 
 	private void setCanvas()
 	{
-		canvas = new Canvas();
+		canvas = new Canvas(); //this is where the graphics are drawn to
 		canvas.setSize(screenSize, screenSize);
 		canvas.addMouseListener(mouseListener); //allows the canvas to detect mouse clicks
 		frame.add(canvas); //adds the canvas to the frame container

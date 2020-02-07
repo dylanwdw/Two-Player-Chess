@@ -89,7 +89,7 @@ public class Queen extends Piece
 			movesArray[y][this.xCord] = 1;
 		}
 		
-		boolean restUnaccesable = false;
+		boolean restUnaccesable = false; //If the pathway is blocked by something, then the rest of the spots behind it do not need to be calculated.
 	
 		//Current Location to top Left
 		int x = this.xCord-1;

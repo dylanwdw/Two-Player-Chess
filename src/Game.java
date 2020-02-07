@@ -1,3 +1,7 @@
+/*
+ * This class's main purpose is to initialize all of the chess pieces and keep track of the state of the game.
+ * This class also detects whether a king is in check or checkmate, or if the game has ended in a draw.
+ */
 public class Game 
 {
 	
@@ -34,13 +38,14 @@ public class Game
 	//initializes every piece with their legal starting positions
 	public static void generatePieces()
 	{
-		
+		//Initializes all the pawns
 		for(int x=0; x<Board.boardWidth; x++)
 		{
 			whitePieces[x] = new Pawn(x, Board.boardWidth-2, Team.WHITE);
 			blackPieces[x] = new Pawn(x, 1, Team.BLACK);
 		}
 		
+		//initializes all of the non-pawn pieces
 		whitePieces[8] = new Rook(0, Board.boardWidth-1, Team.WHITE);
 		whitePieces[15] = new Rook(7, Board.boardWidth-1, Team.WHITE);
 		whitePieces[9] = new Knight(1, Board.boardWidth-1, Team.WHITE);
@@ -60,7 +65,12 @@ public class Game
 		blackPieces[12] = new King(4, 0, Team.BLACK);
 	}	
 	
-	//moves a specified piece to a specified position.
+	/*
+	 * Moves a specified piece to a specified new position
+	 * Sets the old position to null
+	 * calls the updateTurn() function
+	 * updates the game states
+	 */
 	public static void move(Piece piece, int newX, int newY)
 	{
 		Board.board[piece.yCord][piece.xCord] = null; //old position
